@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import SushiContainer from "../containers/SushiContainer";
 
-const MoreButton = (props) => {
-    return <button onClick={/* Fill me in! */ null}>
-            More sushi!
-          </button>
-}
+const MoreButton = props => {
+  return <button onClick={props.onClick}>More sushi!</button>;
+};
 
-export default MoreButton
+export default MoreButton;
