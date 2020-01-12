@@ -5,12 +5,14 @@ import API from './db/API'
 
 
 
+
 class App extends Component {
   state = {
     sushi: [],
     eatenSushi: [],
     currentSushi: [],
-    budget: 120
+    budget: 120, 
+    topOff: false 
   }
   // Shuffle array
   displaySushi = (sushis) => {
@@ -53,13 +55,34 @@ class App extends Component {
     return remaining; 
   };
 
+// top off feature:
+  showTopOff = () => {
+    this.setState({
+      topOff: !this.state.topOff
+    })
+  };
+
+  onTopoff = (amount) => {
+    this.setState({
+      budget:this.state.budget + amount
+    })
+  }
+
   render() {
-    const { eatenSushi, currentSushi} = this.state
+    const { eatenSushi, currentSushi, topOff} = this.state
 
 
     return (
       <div className="app">
-        <SushiContainer sushi={currentSushi} eatingSushi={this.onConsumingSushi} eatenSushi={eatenSushi} moreSushi={this.onMoresushi}/>
+        <SushiContainer 
+          sushi={currentSushi} 
+          eatingSushi={this.onConsumingSushi} 
+          eatenSushi={eatenSushi} 
+          moreSushi={this.onMoresushi}
+          showTopOff={this.showTopOff}
+          topOff={topOff}
+          onTopoff={this.onTopoff}
+        />
         <Table eatenSushi={eatenSushi} remainingBudget={this.remainingBudget} />
       </div>
     );
