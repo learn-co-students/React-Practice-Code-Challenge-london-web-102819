@@ -1,33 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-class Wallet extends React.Component {
+function Wallet(props) {
 
-	state = {
-		amount: 10
-	}
+    const [amount, setAmount] = useState(10);
 
-	changeAmount =  e => {
-		this.setState({
-			amount: e.target.value
-		})
-	}
+    const { addMoney } = props
 
-	render() {
-		const { addMoney } = this.props
+    return (
+        <form 
+            onSubmit = {e => {e.preventDefault(); addMoney(parseInt(amount, 10))} }>
+            <input type="text" 
+                value = {amount} 
+                onChange = {e => setAmount(e.target.value)}>
+            </input>
+            <br></br>
+            <input type = "submit" value = "Add Money To Wallet" ></input>
+        </form>
+    )
 
-		return (
-			<form 
-				onSubmit = {e => {e.preventDefault(); addMoney(parseInt(this.state.amount, 10))} }>
-				<input type="text" 
-					value = {this.state.amount} 
-					onChange = {this.changeAmount}>
-				</input>
-			<br></br>
-				<input type = "submit" value = "Add Money To Wallet" ></input>
-			</form>
-		)
-
-	}
 }
 
 export default Wallet;
